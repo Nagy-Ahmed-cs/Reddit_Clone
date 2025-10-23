@@ -1,8 +1,8 @@
-package com.Reddit.reddit_clone.Services.UserServicesImpl;
+package com.Reddit.reddit_clone.Services.Implementations;
 
-import com.Reddit.reddit_clone.Model.Dtos.UserReqDto;
-import com.Reddit.reddit_clone.Model.Dtos.UserResDto;
-import com.Reddit.reddit_clone.Model.Dtos.UserUpdateDto;
+import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserReqDto;
+import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserResDto;
+import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserUpdateDto;
 import com.Reddit.reddit_clone.Model.Entities.User;
 import com.Reddit.reddit_clone.Model.Mappers.UserMapper;
 import com.Reddit.reddit_clone.Repos.UserRepo;
@@ -24,6 +24,9 @@ public class UserServicesImpl implements UserServices
     @Override
     public UserResDto createAccount(UserReqDto dto) {
         User user=userMapper.toEntity(dto);
+        user.setImageName(dto.getImageName());
+        user.setImageType(dto.getImageType());
+        user.setImage(dto.getImage());
         return userMapper.toResponse(userRepo.save(user));
     }
 

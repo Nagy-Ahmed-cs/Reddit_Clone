@@ -1,4 +1,4 @@
-package com.Reddit.reddit_clone.Model.Dtos;
+package com.Reddit.reddit_clone.Model.Dtos.UserDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

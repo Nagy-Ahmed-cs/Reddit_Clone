@@ -1,8 +1,8 @@
 package com.Reddit.reddit_clone.Services;
 
-import com.Reddit.reddit_clone.Model.Dtos.UserReqDto;
-import com.Reddit.reddit_clone.Model.Dtos.UserResDto;
-import com.Reddit.reddit_clone.Model.Dtos.UserUpdateDto;
+import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserReqDto;
+import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserResDto;
+import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserUpdateDto;
 import org.springframework.stereotype.Service;
 
 @Service

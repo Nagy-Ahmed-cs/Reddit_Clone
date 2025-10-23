@@ -13,6 +13,10 @@ import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="Users")
@@ -42,5 +46,12 @@ public class User {
     private String imageType;
     @Lob
     private byte [] image;
+
+    @OneToMany(mappedBy = "createdBy",cascade = CascadeType.ALL)
+    private List<Community>communities=new ArrayList<>();
+
+
+    @ManyToMany(mappedBy = "members")
+    private Set<Community> joinedCommunities=new HashSet<>();
 
 }
