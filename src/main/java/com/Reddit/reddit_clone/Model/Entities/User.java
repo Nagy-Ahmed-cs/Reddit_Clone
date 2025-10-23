@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
@@ -41,7 +42,7 @@ public class User {
     private LocalDateTime createAt;
     @UpdateTimestamp
     private LocalDateTime updateAt;
-    private LocalDateTime deleteAt; // this for soft delete ....
+    private LocalDateTime deleteAt;
     private String imageName;
     private String imageType;
     @Lob
@@ -51,6 +52,7 @@ public class User {
     private List<Community>communities=new ArrayList<>();
 
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "members")
     private Set<Community> joinedCommunities=new HashSet<>();
 

@@ -13,6 +13,6 @@ import java.io.IOException;
 public interface UserServices {
     UserResDto createAccount(UserReqDto dto, MultipartFile image) throws IOException;
     Boolean logIn (String userEmail, String password);
-    UserResDto updateProfile(UserUpdateDto dto);
+    UserResDto updateProfile(UserUpdateDto dto, MultipartFile image) throws IOException;
     String deleteAccount(String userEmail);
 }

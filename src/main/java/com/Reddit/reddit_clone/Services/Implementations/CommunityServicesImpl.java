@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 public class CommunityServicesImpl implements CommunityService {
     @Autowired
+
     private CommunityRepo communityRepo;
     @Autowired
     private UserRepo userRepo;
@@ -27,6 +28,7 @@ public class CommunityServicesImpl implements CommunityService {
         Optional<User>user=userRepo.findById(dto.getUserId());
         if(user.isPresent()){
             Community community=communityMapper.toEntity(dto);
+            community.setCreatedBy(user.get());
             user.get().getCommunities().add(community);
             userRepo.save(user.get());
             return communityMapper.toResponse(communityRepo.save(community));
@@ -39,10 +41,14 @@ public class CommunityServicesImpl implements CommunityService {
         Optional<User>user=userRepo.findByUserEmail(userEmail);
         Optional<Community>community=communityRepo.findByCommunityName(communityName);
         if(user.isPresent()&&community.isPresent()){
+            if(user.get().getJoinedCommunities().contains(community.get())){
+                return "The user is already in the community ...\n";
+            }
             user.get().getJoinedCommunities().add(community.get());
             community.get().getMembers().add(user.get());
-            userRepo.save(user.get());
             communityRepo.save(community.get());
+            userRepo.save(user.get());
+
             return "Completely joined the community ......\n";
         }
         return "User is not here or the community is not provided........\n ";

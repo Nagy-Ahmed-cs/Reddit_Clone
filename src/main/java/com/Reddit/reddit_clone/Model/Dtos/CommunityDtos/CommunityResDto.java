@@ -17,5 +17,7 @@ public class CommunityResDto {
     private String communityName;
     private String communityDesc;
     private LocalDateTime createAt;
-    private User user;
+    private String createdByName;
+    private String createdByEmail;
+
 }

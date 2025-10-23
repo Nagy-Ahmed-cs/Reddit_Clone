@@ -26,8 +26,8 @@ public class UserController {
         return ResponseEntity.ok(userServices.logIn(userEmail, password));
     }
     @GetMapping("/update-profile")
-    public ResponseEntity<UserResDto>updateUser(@RequestBody UserUpdateDto dto){
-        return ResponseEntity.ok(userServices.updateProfile(dto));
+    public ResponseEntity<UserResDto>updateUser(@RequestPart UserUpdateDto dto, @RequestPart MultipartFile image) throws IOException {
+        return ResponseEntity.ok(userServices.updateProfile(dto, image));
     }
     @PostMapping("/delete-account")
     public ResponseEntity<String> deleteAccount(@RequestParam String userEmail){

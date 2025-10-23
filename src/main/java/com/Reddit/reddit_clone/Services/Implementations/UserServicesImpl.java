@@ -39,15 +39,15 @@ public class UserServicesImpl implements UserServices
     }
 
     @Override
-    public UserResDto updateProfile(UserUpdateDto dto) {
+    public UserResDto updateProfile(UserUpdateDto dto, MultipartFile image) throws IOException {
         Optional<User> user=userRepo.findById(dto.getUserId());
         if(user.isPresent()){
             user.get().setUpdateAt(LocalDateTime.now());
             user.get().setUserName(dto.getUserName());
             user.get().setPassword(dto.getPassword());
-            user.get().setImageName(dto.getImageName());
-            user.get().setImageType(dto.getImageType());
-            user.get().setImage(dto.getImage());
+            user.get().setImageName(image.getOriginalFilename());
+            user.get().setImageType(image.getContentType());
+            user.get().setImage(image.getBytes());
             return userMapper.toResponse(userRepo.save(user.get()));
 
         }

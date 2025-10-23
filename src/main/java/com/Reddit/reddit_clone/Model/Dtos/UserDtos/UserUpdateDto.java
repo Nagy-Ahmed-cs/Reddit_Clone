@@ -14,7 +14,5 @@ public class UserUpdateDto {
     private Integer userId;
     private String userName;
     private String password;
-    private String imageName;
-    private String imageType;
-    private byte [] image;
+
 }

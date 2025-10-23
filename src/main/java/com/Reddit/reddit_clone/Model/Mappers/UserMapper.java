@@ -4,9 +4,11 @@ import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserReqDto;
 import com.Reddit.reddit_clone.Model.Dtos.UserDtos.UserResDto;
 import com.Reddit.reddit_clone.Model.Entities.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     User toEntity(UserReqDto dto);
+
     UserResDto toResponse(User user);
 }
