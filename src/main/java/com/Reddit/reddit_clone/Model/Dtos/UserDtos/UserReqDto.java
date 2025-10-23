@@ -15,8 +15,5 @@ public class UserReqDto {
     private String userEmail;
     private String password;
     private String phoneNumber;
-    private String imageName;
-    private String imageType;
-    private byte [] image;
 
 }

@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 
 public class UserController {
@@ -16,8 +18,8 @@ public class UserController {
     private UserServices userServices;
     @PostMapping("/create-account")
     public ResponseEntity<UserResDto>createAccount(
-            @RequestPart UserReqDto dto, @RequestPart MultipartFile image){
-        return ResponseEntity.ok(userServices.createAccount(dto));
+            @RequestPart UserReqDto dto, @RequestPart MultipartFile image) throws IOException {
+        return ResponseEntity.ok(userServices.createAccount(dto, image));
     }
     @GetMapping("/login")
     public ResponseEntity<Boolean>logIn(@RequestParam String userEmail,@RequestParam String password){

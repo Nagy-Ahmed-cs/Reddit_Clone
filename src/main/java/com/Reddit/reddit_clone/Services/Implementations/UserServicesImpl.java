@@ -9,7 +9,9 @@ import com.Reddit.reddit_clone.Repos.UserRepo;
 import com.Reddit.reddit_clone.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -22,11 +24,11 @@ public class UserServicesImpl implements UserServices
     @Autowired
     private UserMapper userMapper;
     @Override
-    public UserResDto createAccount(UserReqDto dto) {
+    public UserResDto createAccount(UserReqDto dto, MultipartFile image) throws IOException {
         User user=userMapper.toEntity(dto);
-        user.setImageName(dto.getImageName());
-        user.setImageType(dto.getImageType());
-        user.setImage(dto.getImage());
+        user.setImageName(image.getOriginalFilename());
+        user.setImageType(image.getContentType());
+        user.setImage(image.getBytes());
         return userMapper.toResponse(userRepo.save(user));
     }
 
