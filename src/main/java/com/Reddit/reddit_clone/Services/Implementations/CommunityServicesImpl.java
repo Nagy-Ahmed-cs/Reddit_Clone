@@ -76,6 +76,7 @@ public class CommunityServicesImpl implements CommunityService {
             return communityMapper.toResponse(community.get());
         }
         else {
+            System.out.println("The Community si not here ....\n");
             return null;
         }
     }

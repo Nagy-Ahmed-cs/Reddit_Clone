@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
@@ -52,8 +53,27 @@ public class User {
     private List<Community>communities=new ArrayList<>();
 
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "members")
-    private Set<Community> joinedCommunities=new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "community_members",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "community_id")
+    )
+    private Set<Community> joinedCommunities = new HashSet<>();
 
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User other = (User) o;
+        return userId != null && userId.equals(other.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return (userId != null) ? userId.hashCode() : System.identityHashCode(this);
+    }
 }
