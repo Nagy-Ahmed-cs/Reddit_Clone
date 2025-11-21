@@ -25,7 +25,7 @@ public class PostController {
     }
     @GetMapping("/get-user-posts")
     public ResponseEntity<List<PostResDto>>getUserPosts(@RequestParam String email){
-        return ResponseEntity.ok(postServices.getPostForCommunity(email));
+        return ResponseEntity.ok(postServices.getPostForUser(email));
     }
     @PostMapping("delete-post")
     public ResponseEntity<String> deletePost(Integer postId){
