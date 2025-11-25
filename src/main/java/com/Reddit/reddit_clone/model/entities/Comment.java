@@ -5,32 +5,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name="posts")
+@Table(name="comments")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 
-public class Post {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer postId;
+    private Integer commentId;
     private String content;
-    private String title;
     @CreationTimestamp
     private LocalDateTime createAt;
+    @UpdateTimestamp
+    private LocalDateTime updateAt;
+    private boolean isEdited;
+    @ManyToOne
+    @JoinColumn(name="post_id")
+    Post post;
     @ManyToOne
     @JoinColumn(name="user_id")
-    private User user;
-    @ManyToOne
-    @JoinColumn(name="community_id")
-    private Community community;
-
-    @OneToMany(mappedBy = "post")
-    private List<Comment>comments;
-
+    User user;
 }
